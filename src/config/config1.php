@@ -1,0 +1,13 @@
+<?php
+
+const BD_HOST = '';
+const BD_USER = '';
+const BD_PASSWORD = '';
+const BD_NAME = '';
+const BD_CHARSET = 'utf8';
+
+//ingresar link de proyecto
+const BASE_URL = '';
+const BASE_URL_SERVER = '';
+
+?>
