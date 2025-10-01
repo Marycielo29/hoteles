@@ -8,21 +8,21 @@ async function listarClientes() {
         let datos = new FormData();
         datos.append('sesion', session_session);
         datos.append('token', token_token);
-        let respuesta = await fetch(base_url_server+'src/control/clients.php?tipo=listarClientes',{
+        let respuesta = await fetch(base_url_server+'src/control/ClientController.php?tipo=listarClientes',{
             method: 'POST',
             mode: 'cors',
             cache : 'no-cache',
             body : datos
         });
         json = await respuesta.json();
-        let bodyHtml = document.getElementById("tbody_clients");
+        let bodyHtml = document.getElementById("tbody_clienteApi");
         if (json.status){
             bodyHtml.innerHTML = "";
             let datos = json.contenido;
             let cont = 0;
             datos.forEach(item => {
                 let nuevaFila =  document.createElement("tr");
-                nuevaFila.id = item.cliente_id;
+                nuevaFila.id = item.id;
                 cont ++;
                 nuevaFila.innerHTML = `
                 <td scope="row">${cont}</td>
@@ -30,9 +30,10 @@ async function listarClientes() {
                 <td>${item.razon_social}</td>
                 <td>${item.telefono}</td>
                 <td>${item.correo}</td>
+                <td>${item.estado}</td>
                 <td class="text-center">${item.options}</td>
                 `;
-                document.querySelector('#tbody_clients').appendChild(nuevaFila);
+                document.querySelector('#tbody_clienteApi').appendChild(nuevaFila);
             });
         }
     } catch (e) {
@@ -43,10 +44,10 @@ async function listarClientes() {
 // REGISTRAR CLIENTE
 async function registrarCliente(){
     try {
-        let datos = new FormData(frm_new_client);
+        let datos = new FormData(frm_new_clienteApi);
         datos.append('sesion', session_session);
         datos.append('token', token_token);
-        let respuesta = await fetch(base_url_server+'src/control/clients.php?tipo=registrarCliente',{
+        let respuesta = await fetch(base_url_server+'src/control/ClientController.php?tipo=registrarCliente',{
             method : 'POST',
             mode: 'cors',
             cache: 'no-cache',
@@ -54,9 +55,9 @@ async function registrarCliente(){
         });
         json = await respuesta.json();
         if(json.status){
-            let formOrg = document.getElementById("frm_new_client");
+            let formOrg = document.getElementById("frm_new_clienteApi");
             formOrg.reset();
-            let modalEl = document.getElementById("registroClienteModal");
+            let modalEl = document.getElementById("registroCliente");
             let modal = bootstrap.Modal.getInstance(modalEl);
             modal.hide();
 
@@ -81,70 +82,22 @@ async function registrarCliente(){
     }
 }
 
-// CONFIRMAR ELIMINAR
-function antesEliminarCliente(id){
-    Swal.fire({
-        title: "Eliminar Cliente?",
-        text: "¿Estas seguro que quieres eliminar este cliente?",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Sí, eliminalo!"
-    }).then((result) => {
-        if (result.isConfirmed) {
-            eliminarCliente(id);
-        }
-    });
-}
-
-// ELIMINAR CLIENTE
-async function eliminarCliente(id) {
-    try {
-        let datos = new FormData();
-        datos.append('sesion', session_session);
-        datos.append('token', token_token);
-        datos.append('idCliente', id);
-        let respuesta = await fetch(base_url_server+'src/control/clients.php?tipo=eliminarCliente',{
-            method: 'POST',
-            mode: 'cors',
-            cache : 'no-cache',
-            body : datos
-        });
-        json = await respuesta.json();
-        if (json.status){
-            Swal.fire({
-                text: json.mensaje,
-                icon: 'success',
-                confirmButtonText: 'OK'
-            });
-            listarClientes();
-        }else{
-            Swal.fire({
-                text: json.mensaje,
-                icon: 'error',
-                confirmButtonText: 'OK'
-            });
-        }
-    } catch (e) {
-        console.log('Error eliminarCliente || '+ e);   
-    }
-}
 
 // OBTENER CLIENTE
 async function obtenerCliente(id) {
     let data = document.getElementById("data");
-    let ruc = document.getElementById("upd_ruc");
-    let razon = document.getElementById("upd_razon_social");
-    let telefono = document.getElementById("upd_telefono");
-    let correo = document.getElementById("upd_correo");
+    let ruc = document.getElementById("n_ruc");
+    let razon = document.getElementById("n_razon_social");
+    let telefono = document.getElementById("n_telefono");
+    let correo = document.getElementById("n_correo");
+    let estado = document.getElementById("estado");
 
     try {
         let datos = new FormData();
         datos.append('sesion', session_session);
         datos.append('token', token_token);
         datos.append('data', id);
-        let respuesta = await fetch(base_url_server+'src/control/clients.php?tipo=obtenerCliente',{
+        let respuesta = await fetch(base_url_server+'src/control/ClientController.php?tipo=obtenerCliente',{
             method: 'POST',
             mode: 'cors',
             cache : 'no-cache',
@@ -152,12 +105,13 @@ async function obtenerCliente(id) {
         });
         json = await respuesta.json();
         if (json.status){
-            let dato = json.contenido;
-            data.value = dato.cliente_id;
-            ruc.value = dato.ruc;
-            razon.value = dato.razon_social;
-            telefono.value = dato.telefono;
-            correo.value = dato.correo;
+            let datos = json.contenido;
+            data.value = datos.id;
+            ruc.value = datos.ruc;
+            razon.value = datos.razon_social;
+            telefono.value = datos.telefono;
+            correo.value = datos.correo;
+            estado.value = datos.estado;
         }
     } catch (e) {
         console.log("Error obtenerCliente || " + e);
@@ -168,11 +122,11 @@ async function obtenerCliente(id) {
 async function actualizarCliente() {
     let data = document.getElementById("data").value;
     try {
-        let datos = new FormData(frm_upd_client);
+        let datos = new FormData(frm_upd_clienteApi);
         datos.append('sesion', session_session);
         datos.append('token', token_token);
         datos.append('data', data );
-        let respuesta = await fetch(base_url_server+'src/control/clients.php?tipo=actualizarCliente',{
+        let respuesta = await fetch(base_url_server+'src/control/ClientController.php?tipo=actualizarCliente',{
             method : 'POST',
             mode: 'cors',
             cache: 'no-cache',
@@ -180,9 +134,9 @@ async function actualizarCliente() {
         });
         json = await respuesta.json();
         if(json.status){
-            let formOrg = document.getElementById("frm_upd_client");
+            let formOrg = document.getElementById("frm_upd_clienteApi");
             formOrg.reset();
-            let modalEl = document.getElementById("actualizarClienteModal");
+            let modalEl = document.getElementById("actualizarCliente");
             let modal = bootstrap.Modal.getInstance(modalEl);
             modal.hide();
 
@@ -205,4 +159,24 @@ async function actualizarCliente() {
     } catch (e) {
         console.log('Error actualizarCliente || ' + e);
     }
+}
+
+function asignarToken(){
+    Swal.fire({
+  title: "Generar Token?",
+    text: "¿Deseas generar token para este cliente?",
+  icon: "warning",
+  showCancelButton: true,
+  confirmButtonColor: "#3085d6",
+  cancelButtonColor: "#d33",
+  confirmButtonText: "Sí, Generar!"
+}).then((result) => {
+  if (result.isConfirmed) {
+    Swal.fire({
+      title: "Generado!",
+      text: "Token Generado",
+      icon: "success"
+    });
+  }
+});
 }

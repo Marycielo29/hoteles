@@ -1,48 +1,102 @@
 <?php
-require_once __DIR__ . '/../models/Client.php';
+session_start();
+require_once('../model/admin-sesionModel.php');
+require_once('../model/Client.php');
+require_once('../model/adminModel.php');
 
-class ClientController {
+$tipo = $_GET['tipo'];
 
-    // Listar clientes
-    public function index() {
-        $client = new Client();
-        $stmt = $client->getAll();
-        $clients = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        echo json_encode($clients);
+//instanciar la clase categoria model
+$objSesion = new SessionModel();
+$objClient = new Client();
+$objAdmin = new AdminModel();
+
+//variables de sesion
+$id_sesion = $_REQUEST['sesion'];
+$token = $_REQUEST['token'];
+
+if($tipo =="registrarCliente"){
+  $arr_Respuesta = array('status' => false, 'mensaje' => 'Error_Sesion');
+    if ($objSesion->verificar_sesion_si_activa($id_sesion, $token)) {
+     if($_POST){
+       $ruc = ucfirst(trim($_POST['ruc']));
+       $razon_social = strtolower($_POST['razon_social']);
+       $telefono = trim($_POST['telefono']);
+       $correo = trim($_POST['correo']);
+
+       if($ruc == ""|| $razon_social == "" || $telefono == ""|| $correo == "" || !is_numeric($ruc) || strlen($ruc)!== 11){
+        $arr_Respuesta = array('status' => false, 'mensaje' => 'error sistema');
+       }else{
+        $id_new_cliente = $objClient->registrarClienteApi($ruc,$razon_social,$telefono,$correo);
+        if($id_new_cliente > 0){
+         $arr_Respuesta = array('status' => true, 'mensaje' => 'Registro exitoso');
+        }else{
+         $arr_Respuesta = array('status' => false, 'mensaje' => 'Error registro');
+        }
+       }
+     }
     }
-
-    // Obtener cliente por ID
-    public function show($id) {
-        $client = new Client();
-        $data = $client->getById($id);
-        echo json_encode($data);
-    }
-
-    // Crear cliente
-    public function create() {
-        $data = json_decode(file_get_contents("php://input"), true);
-        $client = new Client();
-        $client->ruc = $data['ruc'];
-        $client->razon_social = $data['razon_social'];
-        $client->telefono = $data['telefono'];
-        $client->correo = $data['correo'];
-        $client->fecha_registro = date("Y-m-d H:i:s");
-        $client->estado = 1;
-        $client->create();
-        echo json_encode(["status" => "success"]);
-    }
-
-    // Editar cliente
-    public function edit($id) {
-        $data = json_decode(file_get_contents("php://input"), true);
-        $client = new Client();
-        $client->id = $id;
-        $client->ruc = $data['ruc'];
-        $client->razon_social = $data['razon_social'];
-        $client->telefono = $data['telefono'];
-        $client->correo = $data['correo'];
-        $client->estado = $data['estado'];
-        $client->update();
-        echo json_encode(["status" => "updated"]);
-    }
+    echo json_encode($arr_Respuesta);
 }
+
+if($tipo == "listarClientes"){
+  $arr_Respuesta = array('status' => false, 'mensaje' => 'Error_Sesion');
+    if ($objSesion->verificar_sesion_si_activa($id_sesion, $token)) {
+        $arrClientes = $objClient->listarClientes();
+        if($arrClientes){
+           for ($i=0; $i < count($arrClientes); $i++) { 
+
+            $arrClientes[$i]->estado = $arrClientes[$i]->estado == 1? '<span class="status status-activo">Activo</span>':'<span class="status status-inactivo">Inactivo</span>';
+
+            $id_cliente = $arrClientes[$i]->id;
+             $opciones = ' <button class="btn btn-warning btn-sm me-1" data-bs-toggle="modal" data-bs-target="#actualizarCliente" onclick="obtenerCliente('.$id_cliente.');"><i class="bi bi-pencil-square"></i></button>
+             <button class="btn btn-warning btn-sm me-1" onclick="asignarToken('.$id_cliente.');"><i class="bi bi-key"></i></button>';
+            $arrClientes[$i]->options = $opciones;
+            }
+           
+            $arr_Respuesta['contenido'] = $arrClientes;
+            $arr_Respuesta['status'] = true;
+            $arr_Respuesta['mensaje'] = 'ok';
+        }
+    }
+    echo json_encode($arr_Respuesta);
+}
+
+if($tipo == "obtenerCliente"){
+      $arr_Respuesta = array('status' => false, 'mensaje' => 'Error_Sesion');
+    if ($objSesion->verificar_sesion_si_activa($id_sesion, $token)) {
+      $id_cliente = trim($_POST['data']);
+      $arrCliente = $objClient->buscarClienteById($id_cliente);
+      $arr_Respuesta['contenido'] = $arrCliente;
+      $arr_Respuesta['status'] = true;
+    }
+    echo json_encode($arr_Respuesta);
+  }
+
+    if($tipo == "actualizarCliente"){
+    $arr_Respuesta = array('status' => false, 'mensaje' => 'Error_Sesion');
+    if ($objSesion->verificar_sesion_si_activa($id_sesion, $token)) {
+       if ($_POST) {
+        $id_cliente = trim($_POST['data']);
+       $ruc = $_POST['n_ruc'];
+       $razon = trim($_POST['n_razon_social']);
+       $telefono = ucfirst(trim($_POST['n_telefono']));
+       $correo = trim($_POST['n_correo']);
+       $estado = trim($_POST['estado']);
+      
+       if($id_cliente==""|| $ruc == "" || $razon == ""|| $telefono== ""|| $correo == ""||$estado == ""||!is_numeric($ruc)||strlen($ruc)!==11){
+        $arr_Respuesta = array('status' => false, 'mensaje' => 'Error sistem');
+       }else{
+         $actualizar = $objClient->actualizarCliente($id_cliente,$ruc,$razon,$telefono,$correo,$estado);
+         if($actualizar){
+         $arr_Respuesta = array('status' => true, 'mensaje' => 'Actualizazdo correctamente');
+         }else{
+          $arr_Respuesta = array('status' => false, 'mensaje' => 'Error de sistema');
+         }
+       }
+       }
+    }
+    echo json_encode($arr_Respuesta);
+  }
+
+?>

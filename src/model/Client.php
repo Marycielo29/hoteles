@@ -1,70 +1,40 @@
 <?php
 require_once "../library/conexion.php";
 
-class Client {
-    private $conn;
-    private $table = "Client_API";
-
-    public $id;
-    public $ruc;
-    public $razon_social;
-    public $telefono;
-    public $correo;
-    public $fecha_registro;
-    public $estado;
-
-    public function __construct() {
-        $database = new Database();
-        $this->conn = $database->getConnection();
+class Client{
+    private $conexion;
+    function __construct(){
+        $this->conexion = new Conexion();
+        $this->conexion = $this->conexion->connect();
     }
 
-    // Listar todos
-    public function getAll() {
-        $query = "SELECT * FROM " . $this->table;
-        $stmt = $this->conn->prepare($query);
-        $stmt->execute();
-        return $stmt;
+        public function registrarClienteApi($ruc,$razon_social,$telefono,$correo)
+    {
+        $sql = $this->conexion->query("INSERT INTO client_api (ruc,razon_social,telefono,correo) VALUES ('$ruc','$razon_social','$telefono','$correo')");
+        if ($sql) {
+            $sql = $this->conexion->insert_id;
+        } else {
+            $sql = 0;
+        }
+        return $sql;
     }
-
-    // Obtener por ID
-    public function getById($id) {
-        $query = "SELECT * FROM " . $this->table . " WHERE id = ?";
-        $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(1, $id);
-        $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+    public function listarClientes(){
+        $arrRespuesta = array();
+        $sql = $this->conexion->query("SELECT * FROM client_api");
+        while ($objeto = $sql->fetch_object()) {
+            array_push($arrRespuesta, $objeto);
+        }
+        return $arrRespuesta;
     }
-
-    // Crear
-    public function create() {
-        $query = "INSERT INTO " . $this->table . " 
-                 (ruc, razon_social, telefono, correo, fecha_registro, estado) 
-                 VALUES (:ruc, :razon_social, :telefono, :correo, :fecha_registro, :estado)";
-        $stmt = $this->conn->prepare($query);
-        return $stmt->execute([
-            ':ruc' => $this->ruc,
-            ':razon_social' => $this->razon_social,
-            ':telefono' => $this->telefono,
-            ':correo' => $this->correo,
-            ':fecha_registro' => $this->fecha_registro,
-            ':estado' => $this->estado
-        ]);
+    public function buscarClienteById($id)
+    {
+        $sql = $this->conexion->query("SELECT * FROM client_api WHERE id='$id'");
+        $sql = $sql->fetch_object();
+        return $sql;
     }
-
-    // Actualizar
-    public function update() {
-        $query = "UPDATE " . $this->table . " 
-                  SET ruc = :ruc, razon_social = :razon_social, telefono = :telefono, 
-                      correo = :correo, estado = :estado
-                  WHERE id = :id";
-        $stmt = $this->conn->prepare($query);
-        return $stmt->execute([
-            ':ruc' => $this->ruc,
-            ':razon_social' => $this->razon_social,
-            ':telefono' => $this->telefono,
-            ':correo' => $this->correo,
-            ':estado' => $this->estado,
-            ':id' => $this->id
-        ]);
+   public function actualizarCliente($id_cliente,$ruc,$razon,$telefono,$correo,$estado)
+    {
+        $sql = $this->conexion->query("UPDATE client_api SET ruc='$ruc',razon_social='$razon',telefono='$telefono',correo ='$correo',estado='$estado' WHERE id='$id_cliente'");
+        return $sql;
     }
 }

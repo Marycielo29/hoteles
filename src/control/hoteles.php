@@ -68,7 +68,7 @@ if($tipo == "listarHoteles"){
 
             $id_hotel = $arr_hoteles[$i]->hotel_id;
              $opciones = ' <button class="btn btn-warning btn-sm me-1" data-bs-toggle="modal" data-bs-target="#actualizarHotel" onclick="obtenerHotel('.$id_hotel.');"><i class="bi bi-pencil-square"></i></button>
-                            <button class="btn btn-danger btn-sm" onclick="antesEliminarHotel('.$id_hotel.');"><i class="bi bi-trash"></i></button>
+                            <a href="detalleHotel?data='.($id_hotel).'"><button class="btn btn-warning btn-sm"><i class="bi bi-eye-fill"></i></button></a>
                             <a href="servicios?data='.($id_hotel).'"><button class="btn btn-success btn-sm"><i class="bi bi-folder-symlink-fill"></i></button></a>
                             <a href="habitaciones?data='.($id_hotel).'"><button class="btn btn-info btn-sm" ><i class="bi bi-houses-fill"></i></button></a>';
             $arr_hoteles[$i]->options = $opciones;
@@ -116,6 +116,25 @@ if($tipo == "obtenerHotel"){
     if ($objSesion->verificar_sesion_si_activa($id_sesion, $token)) {
       $idHotel = trim($_POST['data']);
       $arrHotel = $objHotel->buscarHotelById($idHotel);
+
+          switch ($arrHotel->categoria) {
+            case '1':
+              $arrHotel->estrellas = ' <i class="bi bi-star-fill"></i>';
+              break;
+            case '2':
+              $arrHotel->estrellas = ' <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>';
+              break;
+            case '3':
+              $arrHotel->estrellas = '<i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>';
+              break;
+              case '4':
+                 $arrHotel->estrellas = '<i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>';
+                 break;
+              case '5':
+                 $arrHotel->estrellas = '<i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>';
+                break;
+           }
+
       $arr_Respuesta['contenido'] = $arrHotel;
       $arr_Respuesta['status'] = true;
     }

@@ -102,6 +102,9 @@
                 <a href="<?php echo BASE_URL;?>hoteles" class="list-group-item list-group-item-action">
                     <i class="bi bi-building me-2"></i> Hoteles
                 </a>
+                <a href="<?php echo BASE_URL;?>clients" class="list-group-item list-group-item-action">
+                    <i class="bi bi-building me-2"></i> Clientes Api
+                </a>
                 <a href="#" onclick="cerrar_sesion();" class="list-group-item list-group-item-action">
                     <i class="bi bi-box-arrow-right me-2"></i> Salir
                 </a>
