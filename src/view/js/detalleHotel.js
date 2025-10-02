@@ -64,7 +64,6 @@ async function listarHabitaciones() {
                 <td>${item.moneda}</td>
               
                 <td>${item.cantidad_disponible}</td>
-                <td class="text-center">${item.options}</td>
                 `;
                 document.querySelector('#tbody_habitaciones').appendChild(nuevaFila);
             });
@@ -99,7 +98,6 @@ async function listarServicios() {
                 nuevaFila.innerHTML = `
                 <td scope="row">${cont}</td>
                 <td>${item.nombre}</td>
-                <td class="text-center">${item.options}</td>
                 `;
                 document.querySelector('#tbody_servicios').appendChild(nuevaFila);
             });

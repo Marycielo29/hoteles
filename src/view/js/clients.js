@@ -161,22 +161,3 @@ async function actualizarCliente() {
     }
 }
 
-function asignarToken(){
-    Swal.fire({
-  title: "Generar Token?",
-    text: "¿Deseas generar token para este cliente?",
-  icon: "warning",
-  showCancelButton: true,
-  confirmButtonColor: "#3085d6",
-  cancelButtonColor: "#d33",
-  confirmButtonText: "Sí, Generar!"
-}).then((result) => {
-  if (result.isConfirmed) {
-    Swal.fire({
-      title: "Generado!",
-      text: "Token Generado",
-      icon: "success"
-    });
-  }
-});
-}

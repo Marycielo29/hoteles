@@ -50,7 +50,7 @@ if($tipo == "listarClientes"){
 
             $id_cliente = $arrClientes[$i]->id;
              $opciones = ' <button class="btn btn-warning btn-sm me-1" data-bs-toggle="modal" data-bs-target="#actualizarCliente" onclick="obtenerCliente('.$id_cliente.');"><i class="bi bi-pencil-square"></i></button>
-             <button class="btn btn-warning btn-sm me-1" onclick="asignarToken('.$id_cliente.');"><i class="bi bi-key"></i></button>';
+             <a href="tokensClient?data='.($id_cliente).'"><button class="btn btn-warning btn-sm me-1"><i class="bi bi-key"></i></button><a>';
             $arrClientes[$i]->options = $opciones;
             }
            

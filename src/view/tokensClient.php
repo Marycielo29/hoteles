@@ -124,10 +124,10 @@
         <!-- Sección de Gestión de Tokens API -->
         <div class="card">
             <div class="card-header">
-                Gestión de Tokens API para: <span class="client-name">Soluciones Digitales S.A.C.</span>
+                Gestión de Tokens API para: <span class="client-name" id="client_name">Soluciones Digitales S.A.C.</span>
             </div>
             <div class="card-body">
-                <button class="btn-primary" style="margin-bottom: 20px;"><i class="fas fa-key"></i> Generar Nuevo Token</button>
+                <button class="btn-primary" style="margin-bottom: 20px;" onclick="asignarToken();"><i class="fas fa-key"></i> Generar Nuevo Token</button>
                 <div class="table-container">
                     <table class="table">
                         <thead>
@@ -135,63 +135,12 @@
                                 <th>#</th>
                                 <th>Token</th>
                                 <th>Fecha de Creación</th>
-                                <th>Fecha de Expiración</th>
                                 <th>Estado</th>
-                                <th>Acciones</th>
+                                <th></th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td class="token-cell">
-                                    <span>sk_live_xxxx...a4f8</span>
-                                    <i class="far fa-copy copy-icon" title="Copiar token"></i>
-                                </td>
-                                <td>2024-09-20 11:45:00</td>
-                                <td>2025-09-20 11:45:00</td>
-                                <td><span class="status status-activo">Activo</span></td>
-                                <td>
-                                    <button class="action-btn btn-delete" title="Revocar Token"><i class="fas fa-trash"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td class="token-cell">
-                                    <span>sk_live_xxxx...b9c1</span>
-                                    <i class="far fa-copy copy-icon" title="Copiar token"></i>
-                                </td>
-                                <td>2024-05-10 09:00:00</td>
-                                <td>2025-05-10 09:00:00</td>
-                                <td><span class="status status-activo">Activo</span></td>
-                                <td>
-                                    <button class="action-btn btn-delete" title="Revocar Token"><i class="fas fa-trash"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td class="token-cell">
-                                    <span>sk_live_xxxx...d3e7</span>
-                                </td>
-                                <td>2023-11-01 16:20:30</td>
-                                <td>2024-11-01 16:20:30</td>
-                                <td><span class="status status-revocado">Revocado</span></td>
-                                <td>
-                                    <!-- No hay acciones para un token revocado -->
-                                </td>
-                            </tr>
-                             <tr>
-                                <td>4</td>
-                                <td class="token-cell">
-                                    <span>sk_test_xxxx...f2a5</span>
-                                    <i class="far fa-copy copy-icon" title="Copiar token"></i>
-                                </td>
-                                <td>2024-01-15 12:00:00</td>
-                                <td>Nunca</td>
-                                <td><span class="status status-activo">Activo</span></td>
-                                <td>
-                                    <button class="action-btn btn-delete" title="Revocar Token"><i class="fas fa-trash"></i></button>
-                                </td>
-                            </tr>
+                        <tbody id="tbody_tokens">
+
                         </tbody>
                     </table>
                 </div>
@@ -199,3 +148,6 @@
         </div>
 
     </div>
+
+<script> let id_client = '<?php echo $_GET['data'] ?>'</script>
+<script src="<?php echo BASE_URL;?>src/view/js/tokensClients.js"></script>

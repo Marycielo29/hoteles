@@ -203,7 +203,6 @@
                                     <th scope="col">Precio / Noche</th>
                                     <th scope="col">Moneda</th>
                                     <th scope="col">Cantidad disponible</th>
-                                    <th scope="col" class="text-center">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody id="tbody_habitaciones">
@@ -227,7 +226,6 @@
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Nombre del Servicio</th>
-                                <th scope="col" class="text-center">Acciones</th>
                             </tr>
                         </thead>
                         <tbody id="tbody_servicios">
