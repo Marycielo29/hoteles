@@ -188,10 +188,9 @@
         <!-- Sección de Habitaciones -->
         <div class="card">
             <div class="card-header">
-                Listado de Habitaciones
+                Habitaciones
             </div>
             <div class="card-body">
-                <button class="btn-primary" style="margin-bottom: 20px;" data-bs-toggle="modal" data-bs-target="#registroHabitacionModal"><i class="fas fa-plus"></i> Agregar Habitación</button>
                 <div class="table-container">
                     <div class="table-responsive">
                         <table class="table table-hover table-striped align-middle">
@@ -217,7 +216,7 @@
         <!-- Sección de Servicios -->
         <div class="card">
             <div class="card-header">
-                Servicios Incluidos
+                Servicios
             </div>
             <div class="card-body">
                 <div class="table-responsive">

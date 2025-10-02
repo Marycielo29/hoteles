@@ -49,8 +49,8 @@ if($tipo == "listarClientes"){
             $arrClientes[$i]->estado = $arrClientes[$i]->estado == 1? '<span class="status status-activo">Activo</span>':'<span class="status status-inactivo">Inactivo</span>';
 
             $id_cliente = $arrClientes[$i]->id;
-             $opciones = ' <button class="btn btn-warning btn-sm me-1" data-bs-toggle="modal" data-bs-target="#actualizarCliente" onclick="obtenerCliente('.$id_cliente.');"><i class="bi bi-pencil-square"></i></button>
-             <a href="tokensClient?data='.($id_cliente).'"><button class="btn btn-warning btn-sm me-1"><i class="bi bi-key"></i></button><a>';
+             $opciones = ' <button class="btn btn-outline-secondary btn-sm me-1" data-bs-toggle="modal" data-bs-target="#actualizarCliente" onclick="obtenerCliente('.$id_cliente.');"><i class="bi bi-pencil-square"></i></button>
+             <a href="tokensClient?data='.($id_cliente).'"><button class="btn btn-outline-warning btn-sm me-1"><i class="bi bi-key"></i></button><a>';
             $arrClientes[$i]->options = $opciones;
             }
            

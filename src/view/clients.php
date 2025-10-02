@@ -104,14 +104,15 @@
     </style>
 
 <div class="main-content">
-
+    <br>
+<button class="btn-primary" style="margin-bottom: 20px;" data-bs-toggle="modal" data-bs-target="#registroCliente"><i class="fas fa-plus"></i> Agregar Cliente</button>
         <!-- Sección de Gestión de Clientes API -->
         <div class="card">
             <div class="card-header">
                 Gestión de Clientes API
             </div>
             <div class="card-body">
-                <button class="btn-primary" style="margin-bottom: 20px;" data-bs-toggle="modal" data-bs-target="#registroCliente"><i class="fas fa-plus"></i> Agregar Cliente</button>
+                
                 <div class="table-container">
                     <table class="table">
                         <thead>
