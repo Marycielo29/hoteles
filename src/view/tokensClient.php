@@ -124,7 +124,7 @@
         <!-- Sección de Gestión de Tokens API -->
         <div class="card">
             <div class="card-header">
-                Gestión de Tokens API para: <span class="client-name" id="client_name">Soluciones Digitales S.A.C.</span>
+                Gestión de Tokens API para: <span class="client-name" id="client_name">Hoteles HUANTA</span>
             </div>
             <div class="card-body">
                 <button class="btn-primary" style="margin-bottom: 20px;" onclick="asignarToken();"><i class="fas fa-key"></i> Generar Nuevo Token</button>

@@ -37,4 +37,14 @@ class Client{
         $sql = $this->conexion->query("UPDATE client_api SET ruc='$ruc',razon_social='$razon',telefono='$telefono',correo ='$correo',estado='$estado' WHERE id='$id_cliente'");
         return $sql;
     }
+
+    // busqueda api
+
+     public function buscarHotelesNombre($data)
+    {
+        $sql = $this->conexion->query("SELECT * FROM hoteles WHERE id='$id'");
+        $sql = $sql->fetch_object();
+        return $sql;
+    }
+
 }

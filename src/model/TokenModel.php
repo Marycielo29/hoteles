@@ -13,10 +13,13 @@ class TokenModel{
             if (!is_numeric($id_cliente) || $id_cliente <= 0) {
                 return false;
             }
-
+            //variable para generar la fecha año, mes, dia
+            $fecha_registro = date ("Ymd");
             // Generar un token único (puedes ajustar la longitud)
             $token = bin2hex(random_bytes(32)); // 64 caracteres hexadecimales
-
+            //nueva variabke para almacenar toekn, fecha, id cliente
+            $tokenfinal = $token. '-' .$fecha_registro. '-' .$id_cliente;
+            
             // Verificar que no exista otro token activo para el mismo cliente (opcional)
             // Puedes omitir esto si permites múltiples tokens por cliente
             /*
@@ -40,7 +43,7 @@ class TokenModel{
             }
 
         // Vincular parámetros: 'i' = integer, 's' = string
-        $sql->bind_param("is", $id_cliente, $token);
+        $sql->bind_param("is", $id_cliente, $tokenfinal);
 
         // Ejecutar
         if ($sql->execute()) {
