@@ -47,4 +47,7 @@ class Client{
         return $sql;
     }
 
+    // listar
+    
+
 }
