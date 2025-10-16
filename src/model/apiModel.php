@@ -8,12 +8,20 @@ class Api{
         $this->conexion = $this->conexion->connect();
     }
 
-     // busqueda api
+// Buscar hoteles combinando nombre + tipo de habitación
+public function buscarHotelesNombreHabitacion($nombre, $habitaciones)
+{
+    $nombre = $this->conexion->real_escape_string($nombre);
+    $habitaciones = $this->conexion->real_escape_string($habitaciones);
 
-   public function buscarHotelesNombre($data)
-    {
-        $sql = $this->conexion->query("SELECT * FROM hoteles WHERE id='$id'");
-        $sql = $sql->fetch_object();
-        return $sql;
+    $sql = $this->conexion->query(" SELECT * FROM hoteles WHERE nombre LIKE '%$nombre%' AND habitaciones LIKE '%$habitaciones%' ");
+
+    $resultado = [];
+    while ($row = $sql->fetch_object()) {
+        $resultado[] = $row;
     }
+    return $resultado;
+}
+
+
 }

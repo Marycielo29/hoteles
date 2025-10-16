@@ -11,6 +11,7 @@ class vistasControlador extends vistaModelo
    public function obtenerVistaControlador()
     {
 
+
         if (!isset($_SESSION['sesion_id'])) {
             if (isset($_GET['views'])) {
                 $ruta = explode("/", $_GET['views']);

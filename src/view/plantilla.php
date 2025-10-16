@@ -51,7 +51,7 @@ if ($reset == "reset-password") {
     $vista = "reset-password";
 }
 
-if ($vista == "login" || $vista == "404" || $vista == "reset-password") {
+if ($vista == "login" || $vista == "404" || $vista == "reset-password" || $vista == "api") {
     require_once "./src/view/" . $vista . ".php";
 } else {
 

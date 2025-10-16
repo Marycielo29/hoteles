@@ -18,7 +18,9 @@ class vistaModelo
         } elseif ($vista == "login" ) {
             $contenido = "login";
         } elseif($vista == "UpdatePassword"){
-              $contenido = "UpdatePassword";
+            $contenido = "UpdatePassword";
+        } elseif($vista == "api"){
+            $contenido = "api";
         }else {
             $contenido = "404";
         }
