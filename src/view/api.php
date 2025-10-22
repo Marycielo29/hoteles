@@ -132,11 +132,11 @@
   <div class="api-container">
     <div class="api-header">
       <i class="fa-solid fa-hotel"></i>
-      <h2>Cliente API - Hoteles Huanta</h2>
+      <h2>Cliente API - HotelSeek</h2>
       <p class="text-muted">Consulta rápida y segura a tu API de hoteles</p>
     </div>
 
-    <input type="text" id="ruta_api" value="http://localhost:8888/hoteles/">
+    <input type="text" id="ruta_api" value="http://localhost:8888/hoteles/"  class="form-control">
 
     <form id="frmApi">
       <label for="token"><i class="fa-solid fa-key"></i> Token de seguridad</label>

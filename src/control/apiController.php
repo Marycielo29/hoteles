@@ -1,12 +1,14 @@
 <?php
 
 require_once('../model/apiModel.php');
+require_once('../model/apiModel.php');
 
 $tipo = $_GET['tipo'];
 
 //instanciar la clase model
-$objAdmin = new AdminModel();
+//$objAdmin = new AdminModel();
 $objApi = new Api();
+$objclient = new Cliente();
 
 //variables de token
 $token = $_REQUEST['token'];
@@ -18,14 +20,14 @@ if ($tipo == "verHotelesApiByNombreHabitacion") {
   $token_arr = explode("-", $token);
   $id_cliente = $token_arr[2];
 
-  $arr_Cliente = $objClient->buscarClienteById($id_cliente);
+  $arr_Cliente = $objclient->buscarClienteById($id_cliente);
 
   if ($arr_Cliente->estado) {
 
     $nombre = $_POST['nombre'];          // Nombre del hotel
     $habitaciones = $_POST['habitaciones'];  // Tipo de habitación
 
-    $arr_hoteles = $objClient->buscarHotelesNombreHabitacion($nombre, $habitaciones);
+    $arr_hoteles = $objApi->buscarHotelesNombreHabitacion($nombre, $habitaciones);
 
     $arr_Respuesta = array(
       'status' => true,
