@@ -90,7 +90,7 @@
         <!-- Sidebar -->
         <nav class="bg-dark text-white p-3 shadow-lg vh-100 position-fixed" style="width: 250px;">
             <div class="sidebar-heading text-center py-4 fs-4 fw-bold border-bottom border-secondary mb-4">
-                <i class="bi bi-house-fill"></i> Hoteles Huanta
+                <i class="bi bi-house-fill"></i> HotelSeek
             </div>
             <div class="list-group list-group-flush">
                 <a href="<?php echo BASE_URL;?>" class="list-group-item list-group-item-action active">
