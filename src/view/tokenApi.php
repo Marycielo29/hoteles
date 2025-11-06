@@ -1,3 +1,26 @@
+<style>
+/* Espaciado general del contenido principal */
+.main-content {
+    margin-top: 30px;      /* separación del encabezado */
+    margin-left: 20px;     /* separación del menú lateral */
+    margin-right: 20px;    /* opcional, para dar aire a los lados */
+    margin-bottom: 40px;   /* separación del footer */
+}
+
+/* Opcional: si el fondo del contenedor se pierde con el de la página */
+.main-content .card {
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    border-radius: 10px;
+}
+  .card-header {
+            background-color: #343a40;
+            color: white;
+            padding: 16px 24px;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+</style>
+
 <div class="main-content">
     <br>
     <div class="card">

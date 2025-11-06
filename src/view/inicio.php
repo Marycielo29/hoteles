@@ -7,6 +7,7 @@
     --warning-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
     --danger-gradient: linear-gradient(135deg, #57a608ff 0%, #72e222ff 100%);
     --info-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+    --dark-gradient: linear-gradient(135deg, #ffffff 0%, #888888 50%, #000000 100%);
     --glass-bg: rgba(255, 255, 255, 0.9);
     --glass-border: rgba(0, 0, 0, 0.1);
     --shadow-soft: 0 8px 24px rgba(0, 0, 0, 0.1);
@@ -145,7 +146,7 @@ body {
         <div class="col-xl-3 col-md-6">
             <div class="card h-100">
                 <div class="card-body d-flex align-items-center">
-                    <i class="bi bi-people fs-2" style="background: var(--success-gradient);"></i>
+                    <i class="bi bi-person-fill fs-2" style="background: var(--success-gradient);"></i>
                     <div>
                         <div class="fs-5 fw-bold">01</div>
                         <div class="text-dark-50">Usuario</div>
@@ -189,6 +190,43 @@ body {
             </div>
         </div>
     </div>
+
+    <!-- Tarjetas 2-->
+    <div class="row g-4 mb-4">
+        <div class="col-xl-3 col-md-6">
+            <div class="card h-100">
+                <div class="card-body d-flex align-items-center">
+                    <i class="bi bi-people-fill fs-2" style="background: var(--dark-gradient);"></i>
+                    <div>
+                        <div class="fs-5 fw-bold">02</div>
+                        <div class="text-dark-50">Clientes</div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="<?php echo BASE_URL;?>clients">Ver Detalles <i class="bi bi-arrow-right-short"></i> 
+                </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6">
+            <div class="card h-100">
+                <div class="card-body d-flex align-items-center">
+                    <i class="bi bi-key-fill fs-2" style="background: var(--dark-gradient);"></i>
+                    <div>
+                        <div class="fs-5 fw-bold">01</div>
+                        <div class="text-dark-50">Token Api</div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <!-- <a href="#">Ver Detalles <i class="bi bi-arrow-right-short"></i></a> -->
+                     <a href="<?php echo BASE_URL;?>tokenApi">Ver Detalles <i class="bi bi-arrow-right-short"></i>
+                </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <!-- habitaciones -->
     <div class="row">

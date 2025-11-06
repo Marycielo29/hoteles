@@ -103,7 +103,7 @@
                     <i class="bi bi-building me-2"></i> Hoteles
                 </a>
                 <a href="<?php echo BASE_URL;?>clients" class="list-group-item list-group-item-action">
-                    <i class="<bi bi-people me-2"></i> Clientes Api
+                    <i class="<bi bi-people me-2"></i> Clientes
                 </a>
                  <a href="<?php echo BASE_URL;?>tokenApi" class="list-group-item list-group-item-action">
                     <i class="bi bi-lock-fill me-2"></i> Api
