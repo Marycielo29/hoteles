@@ -108,6 +108,9 @@
                  <a href="<?php echo BASE_URL;?>tokenApi" class="list-group-item list-group-item-action">
                     <i class="bi bi-lock-fill me-2"></i> Api
                 </a>
+                <a href="<?php echo BASE_URL;?>api" class="list-group-item list-group-item-action">
+                    <i class="bi bi-file me-2"></i> Reservas
+                </a>
                 <a href="#" onclick="cerrar_sesion();" class="list-group-item list-group-item-action">
                     <i class="bi bi-box-arrow-right me-2"></i> Salir
                 </a>
