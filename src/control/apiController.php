@@ -25,11 +25,15 @@ $objClient = new Cliente();
 // Variables de token
 $token = $_REQUEST['token'] ?? '';
 
+json_encode($token);
+exit;
+
 /**
  * Endpoint: Obtener todos los hoteles
  * Método: GET
  * URL: apiController.php?tipo=verTodosHoteles&token=xxx-xxx-xxx
  */
+
 if ($tipo == "verTodosHoteles") {
     $token_arr = explode("-", $token);
     $id_cliente = $token_arr[2] ?? 0;
