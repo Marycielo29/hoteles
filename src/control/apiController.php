@@ -25,8 +25,14 @@ $objClient = new Cliente();
 // Variables de token
 $token = $_REQUEST['token'] ?? '';
 
-json_encode($token);
-exit;
+//validar token
+$tokenn = explode("-", $token);
+if($tokenn[2] == '' || count($tokenn) < 3){
+    $arr_Respuesta = array('status' => false, 'mensaje' => 'Acceso no autorizado - token invalido');
+    echo json_encode($arr_Respuesta);
+    exit;
+}
+
 
 /**
  * Endpoint: Obtener todos los hoteles
