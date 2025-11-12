@@ -4,7 +4,7 @@
     token: '6abe2cda9a65aacb6a8f53f90af4acebfac82cc611b96d7a11733366aa15291e-20251106-9' // Tu token de acceso
 }; */
 const token = '6abe2cda9a65aacb6a8f53f90af4acebfac82cc611b96d7a11733366aa15291e-20251106-9';
-const baseURL = 'https://reservas.programacion.com.pe/src/control/apiController.php';
+const baseURL = 'https://reservas.programacion.com.pe/src/control/apiController.php?';
 // ===============================
 // 📅 Actualizar fecha y hora
 // ===============================
