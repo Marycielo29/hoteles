@@ -339,29 +339,6 @@ class Api {
         return 0;
     }
 }
-
-
-public function validarClienteToken($id_cliente, $token) {
-    // Limpiar variables
-    $id_cliente = intval($id_cliente);
-    $token = $this->conexion->real_escape_string($token);
-
-    // Verificar si el token está activo para ese cliente
-    $sql = $this->conexion->query("
-        SELECT * FROM tokens_api 
-        WHERE id_client_api = '$id_cliente' 
-          AND token = '$token' 
-          AND estado = 1
-    ");
-
-    // Validar resultados
-    if ($sql && $sql->num_rows > 0) {
-        return true;
-    } else {
-        return false;
-    }
-}
-
     
 }
 ?>
