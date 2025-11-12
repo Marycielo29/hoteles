@@ -1,4 +1,4 @@
-cfhdtherthtrh<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -65,10 +65,7 @@ cfhdtherthtrh<!DOCTYPE html>
             Reservas Pendientes
         </h2>
 
-        <!-- TOKEN DE API -->
-        <form action="" id="dates_api">
-            <input type="hidden" id="token" name="token" value="ba7f44aa83ac77054a7b557b2d6b4a9c8105a3c66f761767acab3f7e512459c8-20251003-2">
-        </form>      
+        <!-- TOKEN DE API -->    
 
         <div class="mb-3">
             <label for="statusFilter" class="form-label">Filtrar por estado:</label>
