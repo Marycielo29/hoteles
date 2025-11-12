@@ -322,5 +322,46 @@ class Api {
         
         return $servicios;
     }
+
+  public function validarEstadoCliente($id_cliente) {
+    // Verificar que el ID sea numérico
+    $id_cliente = intval($id_cliente);
+
+    // Consultar el estado del cliente
+    $sql = $this->conexion->query("SELECT estado FROM client_api WHERE id = '$id_cliente'");
+
+    // Verificar si hay resultados válidos
+    if ($sql && $sql->num_rows > 0) {
+        $sql = $sql->fetch_object();
+        return $sql->estado; // 1 = activo, 0 = inactivo
+    } else {
+        // Si no se encontró el cliente o hubo error, devolver 0 (inactivo)
+        return 0;
+    }
+}
+
+
+public function validarClienteToken($id_cliente, $token) {
+    // Limpiar variables
+    $id_cliente = intval($id_cliente);
+    $token = $this->conexion->real_escape_string($token);
+
+    // Verificar si el token está activo para ese cliente
+    $sql = $this->conexion->query("
+        SELECT * FROM tokens_api 
+        WHERE id_client_api = '$id_cliente' 
+          AND token = '$token' 
+          AND estado = 1
+    ");
+
+    // Validar resultados
+    if ($sql && $sql->num_rows > 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+    
 }
 ?>
