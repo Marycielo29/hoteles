@@ -19,7 +19,6 @@ $tipo = $_GET['tipo'] ?? '';
 $objApi = new Api();
 $objClient = new Cliente();
 
-// Variables de token
 $token = $_REQUEST['token'] ?? '';
 
 /**

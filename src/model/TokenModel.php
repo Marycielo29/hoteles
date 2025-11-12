@@ -7,6 +7,7 @@ class TokenModel{
         $this->conexion = new Conexion();
         $this->conexion = $this->conexion->connect();
     }
+    
 
     public function generarTokenParaCliente($id_cliente) {
             // Validar que el id_cliente sea un entero positivo

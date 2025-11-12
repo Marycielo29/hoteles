@@ -9,6 +9,8 @@ class Api {
         $this->conexion = $this->conexion->connect();
     }
     
+    
+
     /**
      * Obtener todos los hoteles con sus habitaciones
      */
@@ -338,7 +340,9 @@ class Api {
         // Si no se encontró el cliente o hubo error, devolver 0 (inactivo)
         return 0;
     }
+    
 }
+
     
 }
 ?>
