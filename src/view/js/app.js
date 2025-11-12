@@ -1,8 +1,10 @@
 
-const API_CONFIG = {
+/* const API_CONFIG = {
     baseURL: 'https://reservas.programacion.com.pe/src/control/apiController.php', // Cambiar por tu dominio
     token: '6abe2cda9a65aacb6a8f53f90af4acebfac82cc611b96d7a11733366aa15291e-20251106-9' // Tu token de acceso
-};
+}; */
+const token = '6abe2cda9a65aacb6a8f53f90af4acebfac82cc611b96d7a11733366aa15291e-20251106-9';
+const baseURL = 'https://reservas.programacion.com.pe/src/control/apiController.php';
 // ===============================
 // 📅 Actualizar fecha y hora
 // ===============================
@@ -50,9 +52,11 @@ document.addEventListener('DOMContentLoaded', function() {
 // ===============================
 async function listarReservasPorEstado(status) {
     try {
-        let dates = new FormData(dates_api);
+        let dates = new FormData();
         dates.append('status', status);
-        const respuesta = await fetch(url + 'listarReservasPorEstado', {
+        dates.append('token', token);
+
+        const respuesta = await fetch(baseURL + 'listarReservasPorEstado', {
             method: 'POST',
             mode: 'cors',
             cache: 'no-cache',
@@ -71,8 +75,9 @@ async function listarReservasPorEstado(status) {
 // ===============================
 async function listarReservas() {
     try {
-        let dates = new FormData(dates_api);
-        const respuesta = await fetch(url + 'listarReservas', {
+        let dates = new FormData();
+        dates.append('token', token);
+        const respuesta = await fetch(baseURL + 'listarReservas', {
             method: 'POST',
             mode: 'cors',
             cache: 'no-cache',
