@@ -4,7 +4,7 @@
     token: '6abe2cda9a65aacb6a8f53f90af4acebfac82cc611b96d7a11733366aa15291e-20251106-9' // Tu token de acceso
 }; */
 const token = '69df1475dfefa5e87ad70de12423880b4938438dc4e86359f146d5d8aba56736-20251106-6';
-const baseURL = 'https://reservas.programacion.com.pe/src/control/apiController.php?';
+const baseURL = 'https://reservas.programacion.com.pe/src/control/apiController.php?tipo=';
 // ===============================
 // 📅 Actualizar fecha y hora
 // ===============================
@@ -90,7 +90,7 @@ async function listarReservas() {
             console.log(json.mensaje);
         }
     } catch (e) {
-        console.log('error function || ' + e); 
+        console.log('error function listar || ' + e); 
     } 
 }
 
