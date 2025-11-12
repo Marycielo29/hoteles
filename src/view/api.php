@@ -220,7 +220,7 @@
         <p>&copy; 2025 Sistema de Reservas de Hotel. Actualización automática cada 5 minutos. | <a href="#">Contacto</a></p>
     </div>
 
-    <script src="app.js"></script>
+    <script src="<?php echo BASE_URL; ?>src/view/js/app.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
