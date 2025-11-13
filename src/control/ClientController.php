@@ -99,7 +99,7 @@ if($tipo == "obtenerCliente"){
     echo json_encode($arr_Respuesta);
   }
 
-//Peticiones de la API
+/* //Peticiones de la API
 if ($tipo == "verHotelesApiByNombre") {
   $token_arr = explode("-", $token);
   $id_cliente = $token_arr[2];
@@ -114,6 +114,6 @@ if ($tipo == "verHotelesApiByNombre") {
 
   }
   echo json_encode($arr_Respuesta);
-}
+} */
 
 ?>

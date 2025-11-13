@@ -8,6 +8,39 @@ class Api {
         $this->conexion = new Conexion();
         $this->conexion = $this->conexion->connect();
     }
+
+    public function buscarClienteById($id_cliente) {
+        $stmt = $this->conexion->prepare("SELECT * FROM client_api WHERE id = ?");
+        
+        $stmt->bind_param("i", $id_cliente);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        if ($cliente = $result->fetch_object()) {
+            return $cliente;
+        }
+        
+        return null;
+    }
+
+    public function buscarToken($token, $id_cliente) {
+        $stmt = $this->conexion->prepare("
+            SELECT t.id, t.estado, c.estado as cliente_estado
+            FROM tokens t
+            INNER JOIN client_api c ON t.id_client_api = c.id
+            WHERE t.token = ? AND c.id = ?
+        ");
+        
+        $stmt->bind_param("si", $token, $id_cliente);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        if ($tokenData = $result->fetch_object()) {
+            return $tokenData;
+        }
+        
+        return null;
+    }
     
     
 
