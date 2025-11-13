@@ -14,7 +14,7 @@ async function BuscarToken() {
         let json = await respuesta.json();
         if(json.status){
             let datos = json.contenido;
-            //guardar token en local storage
+            //guardar token en local storage -- que permite guardar información de manera local en el navegador del usuario
             localStorage.setItem('tokenApi', datos[0].token);
         }else{
            console.log(json.mensaje);

@@ -122,6 +122,138 @@ try {
         exit;
     }
 
+   if ($tipo == "buscarHotelesPorNombre") {
+        // Leer datos POST JSON
+        $input = json_decode(file_get_contents('php://input'), true);
+        $termino = $input['termino'] ?? $_POST['termino'] ?? '';
+        
+        if (empty($termino)) {
+            $arr_Respuesta = array(
+                'status' => false,
+                'msg' => 'El parámetro "termino" es requerido.'
+            );
+        } else {
+            $arr_hoteles = $objApi->buscarHotelesPorNombre($termino);
+            
+            $arr_Respuesta = array(
+                'status' => true,
+                'mensaje' => 'Búsqueda realizada exitosamente',
+                'contenido' => $arr_hoteles,
+                'total' => count($arr_hoteles)
+            );
+        }
+    echo json_encode($arr_Respuesta, JSON_UNESCAPED_UNICODE);
+    die();
+}
+
+/**
+ * Endpoint: Buscar habitaciones por tipo
+ * Método: POST
+ * URL: apiController.php?tipo=buscarHabitacionesPorTipo&token=xxx-xxx-xxx
+ * Body: { "tipo_habitacion": "suite" }
+ */
+/* if ($tipo == "buscarHabitacionesPorTipo") {
+        $input = json_decode(file_get_contents('php://input'), true);
+        $tipo_habitacion = $input['tipo_habitacion'] ?? $_POST['tipo_habitacion'] ?? '';
+        
+        if (empty($tipo_habitacion)) {
+            $arr_Respuesta = array(
+                'status' => false,
+                'msg' => 'El parámetro "tipo_habitacion" es requerido.'
+            );
+        } else {
+            $arr_habitaciones = $objApi->buscarHabitacionesPorTipo($tipo_habitacion);
+            
+            $arr_Respuesta = array(
+                'status' => true,
+                'msg' => 'Búsqueda de habitaciones realizada exitosamente',
+                'contenido' => $arr_habitaciones,
+                'total' => count($arr_habitaciones)
+            );
+        }
+    echo json_encode($arr_Respuesta, JSON_UNESCAPED_UNICODE);
+    die();
+} */
+
+/**
+ * Endpoint: Obtener hotel por ID con sus habitaciones
+ * Método: GET
+ * URL: apiController.php?tipo=verHotelPorId&token=xxx-xxx-xxx&hotel_id=1
+ */
+/* if ($tipo == "verHotelPorId") {
+        $hotel_id = $_GET['hotel_id'] ?? 0;
+        
+        if ($hotel_id == 0) {
+            $arr_Respuesta = array(
+                'status' => false,
+                'mensaje' => 'El parámetro "hotel_id" es requerido.'
+            );
+        } else {
+            $hotel = $objApi->obtenerHotelPorId($hotel_id);
+            $habitaciones = $objApi->obtenerHabitacionesPorHotel($hotel_id);
+            
+            if ($hotel) {
+                $arr_Respuesta = array(
+                    'status' => true,
+                    'mensaje' => 'Hotel obtenido exitosamente',
+                    'contenido' => array(
+                        'hotel' => $hotel,
+                        'habitaciones' => $habitaciones
+                    )
+                );
+            } else {
+                $arr_Respuesta = array(
+                    'status' => false,
+                    'mensaje' => 'Hotel no encontrado.'
+                );
+            }
+        }   
+    echo json_encode($arr_Respuesta, JSON_UNESCAPED_UNICODE);
+    die();
+} */
+
+/**
+ * Endpoint: Búsqueda combinada (nombre de hotel + tipo de habitación)
+ * Método: POST
+ * URL: apiController.php?tipo=verHotelesApiByNombreHabitacion&token=xxx-xxx-xxx
+ * Body: { "nombre": "Hotel", "habitaciones": "suite" }
+ */
+/* if ($tipo == "verHotelesApiByNombreHabitacion") {
+        $input = json_decode(file_get_contents('php://input'), true);
+        $nombre = $input['nombre'] ?? $_POST['nombre'] ?? '';
+        $habitaciones = $input['habitaciones'] ?? $_POST['habitaciones'] ?? '';
+        
+        $arr_hoteles = $objApi->buscarHotelesNombreHabitacion($nombre, $habitaciones);
+        $arr_Respuesta = array(
+            'status' => true,
+            'mensaje' => 'Búsqueda combinada realizada exitosamente',
+            'contenido' => $arr_hoteles,
+            'total' => count($arr_hoteles)
+        );
+  
+    echo json_encode($arr_Respuesta, JSON_UNESCAPED_UNICODE);
+    die();
+} */
+
+/**
+ * Endpoint: Obtener servicios disponibles
+ * Método: GET
+ * URL: apiController.php?tipo=verServicios&token=xxx-xxx-xxx
+ */
+/* if ($tipo == "verServicios") {
+        $arr_servicios = $objApi->obtenerServicios();
+        
+        $arr_Respuesta = array(
+            'status' => true,
+            'mensaje' => 'Servicios obtenidos exitosamente',
+            'contenido' => $arr_servicios
+        );  
+    echo json_encode($arr_Respuesta, JSON_UNESCAPED_UNICODE);
+    die();
+} */
+
+
+
     // Si llega aquí: tipo no reconocido
     echo json_encode(['status' => false, 'mensaje' => 'Endpoint no reconocido.'], JSON_UNESCAPED_UNICODE);
 
