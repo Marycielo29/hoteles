@@ -1,14 +1,11 @@
-/* const API_CONFIG = {
-    baseURL: 'https://reservas.programacion.com.pe/src/control/apiController.php', // Cambiar por tu dominio
-    token: '6abe2cda9a65aacb6a8f53f90af4acebfac82cc611b96d7a11733366aa15291e-20251106-9' // Tu token de acceso
-}; */
-const token = '69df1475dfefa5e87ad70de12423880b4938438dc4e86359f146d5d8aba56736-20251106-6';
-const baseURL = 'https://reservas.programacion.com.pe/src/control/apiController.php?tipo=';
 
+//obtener token registrado en la base de datos - token del otro sistema 
 async function BuscarToken() {
     try {
         let data = new FormData();
-        let respuesta = await fetch(base_url+'src/control/tokenapiController.php?tipo=obtenerTokencliente',{
+        data.append('token', token_token);
+        data.append('sesion', session_session);
+        let respuesta = await fetch(base_url+'src/control/tokenapiController.php?tipo=listarTokens',{
             method: 'POST',
             mode: 'cors',
             cache: 'no-cache',
@@ -17,15 +14,19 @@ async function BuscarToken() {
         let json = await respuesta.json();
         if(json.status){
             let datos = json.contenido;
-               localStorage.setItem('tokenApi', data.token);
+            //guardar token en local storage
+            localStorage.setItem('tokenApi', datos[0].token);
         }else{
-           console.log("no hay token causa");
+           console.log(json.mensaje);
         }
     } catch (e) {
-       console.log("erro");
-        
+       console.log("error" + e); 
     }
 }
+
+//asiganr valor de token a variable global con local storage
+const token = localStorage.getItem('tokenApi');
+const baseURL = 'https://reservas.programacion.com.pe/src/control/apiController.php?tipo=';
 
 // ===============================
 // 📅 Actualizar fecha y hora
@@ -56,7 +57,7 @@ setInterval(actualizarFechaHora, 1000);
 // ===============================
 document.addEventListener('DOMContentLoaded', function() {
     listarReservas();
-
+    BuscarToken();
     // Filtro por estado
     document.getElementById('statusFilter').addEventListener('change', function() {
         const selectedStatus = this.value;
@@ -109,7 +110,16 @@ async function listarReservas() {
         if (json.status) {
             renderizarReservas(json);
         } else {
+            
             console.log(json.mensaje);
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: json.mensaje + "!",
+                footer: '<a href="tokenApi">Verificar Token</a>'
+                });
+                let container = document.getElementById("container_content");
+                container.innerHTML = '<div class="alert alert-warning" role="alert">'+json.mensaje+'</div>';
         }
     } catch (e) {
         console.log('error function listar || ' + e); 

@@ -6,10 +6,14 @@
     <title>Reservas de Hotel - Estado en Vivo</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.0/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.10.1/sweetalert2.min.css">
     <link rel="stylesheet" href="styles.css">
- <script>
-    const base_url = <?php echo $BASE_URL;?>
- </script>
+<script>
+        const base_url = '<?php echo BASE_URL; ?>';
+        const base_url_server = '<?php echo BASE_URL_SERVER; ?>';
+        const session_session = '<?php echo $_SESSION['sesion_id']; ?>';
+        const token_token = '<?php echo $_SESSION['sesion_token']; ?>';
+</script>
 </head>
 <body>
     <!-- HEADER -->
@@ -224,6 +228,7 @@
     </div>
 
     <script src="<?php echo BASE_URL; ?>src/view/js/app.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.10.1/sweetalert2.all.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
