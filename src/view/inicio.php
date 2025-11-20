@@ -7,7 +7,9 @@
     --warning-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
     --danger-gradient: linear-gradient(135deg, #57a608ff 0%, #72e222ff 100%);
     --info-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-    --dark-gradient: linear-gradient(135deg, #ffffff 0%, #888888 50%, #000000 100%);
+    --dark-gradient: linear-gradient(135deg, #e0f3ff 0%, #4a90e2 50%, #0a1f44 100%);
+    --secondary-gradient: linear-gradient(135deg, #ffe5e9 0%, #c41e3a 50%, #3b000f 100%);
+    --secon-gradient: linear-gradient(135deg, #f3e8ff 0%, #9b5de5 50%, #2d0052 100%);
     --glass-bg: rgba(255, 255, 255, 0.9);
     --glass-border: rgba(0, 0, 0, 0.1);
     --shadow-soft: 0 8px 24px rgba(0, 0, 0, 0.1);
@@ -212,7 +214,7 @@ body {
         <div class="col-xl-3 col-md-6">
             <div class="card h-100">
                 <div class="card-body d-flex align-items-center">
-                    <i class="bi bi-key-fill fs-2" style="background: var(--dark-gradient);"></i>
+                    <i class="bi bi-key-fill fs-2" style="background: var(--secondary-gradient);"></i>
                     <div>
                         <div class="fs-5 fw-bold">01</div>
                         <div class="text-dark-50">Token Api</div>
@@ -225,7 +227,26 @@ body {
                 </div>
             </div>
         </div>
+
+            <div class="col-xl-3 col-md-6">
+            <div class="card h-100">
+                <div class="card-body d-flex align-items-center">
+                    <i class="bi bi-key-fill fs-2" style="background: var(--secon-gradient);"></i>
+                    <div>
+                        <div class="fs-5 fw-bold">Api</div>
+                        <div class="text-dark-50">Reservas</div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <!-- <a href="#">Ver Detalles <i class="bi bi-arrow-right-short"></i></a> -->
+                     <a href="<?php echo BASE_URL;?>api">Ver Detalles <i class="bi bi-arrow-right-short"></i>
+                </a>
+                </div>
+            </div>
+        </div>
     </div>
+
+    
 
 
     <!-- habitaciones -->
@@ -288,6 +309,11 @@ body {
                           <li class="list-group-item text-dark">
                            <i class="bi bi-check-circle text-success me-2"></i>
                             Agua caliente
+                            <span class="badge bg-secondary float-end">Incluido</span>
+                        </li>
+                         <li class="list-group-item text-dark">
+                           <i class="bi bi-check-circle text-success me-2"></i>
+                            Netflix
                             <span class="badge bg-secondary float-end">Incluido</span>
                         </li>
                     </ul>
